@@ -1,22 +1,22 @@
 # agegate
 
-Simple jquery popup that requires a user to type their birthday into a form with optional remember me cookie.
+Simple jQuery popup that requires a user to type their birthday into a form with optional remember me cookie.
 
 Set       
-age: '21',
+`age: '21',
 cookieLength: '7',
-cookieName: 'ageGate'
+cookieName: 'ageGate'`
 
-Call 
-jQuery.ageGate();
+Call
+`jQuery.ageGate();`
 
 or pass settings
 
-jQuery.ageGate({
+`jQuery.ageGate({
   age: '21',
   cookieLength: '7',
   cookieName: 'ageGate'
-});
+});`
 
 TODO:
 Fix cookie regex to work
