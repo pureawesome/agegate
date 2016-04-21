@@ -17,11 +17,21 @@
       remember: 0,
       errors: [],
       init: function() {
+        ageGate.validateSettings();
         var cookie = ageGate.getCookie();
         if (!cookie) {
           ageGate.buildForm();
           ageGate.attach();
         }
+      },
+      validateSettings() {
+        settings.cookieName = settings.cookieName.replace(/\W/g, '');
+        settings.age = parseInt(settings.age, 10);
+        settings.cookieLength = parseInt(settings.cookieLength, 10);
+
+        settings.age = isNaN(settings.age) ? 21 : settings.age;
+        settings.cookieLength = isNaN(settings.cookieLength) ? 7 : settings.cookieLength;
+        console.log(settings);
       },
       buildForm: function() {
         var form = '';
@@ -113,9 +123,8 @@
         document.cookie = name + '=' + value + '; ' + expires;
       },
       getCookie: function() {
-        // var name = settings.cookieName;
-        // TODO: Fix Regex
-        return document.cookie.replace(/(?:(?:^|.*;\s*)ageGate\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+        var regex = new RegExp('(?:(?:^|.*;\\s*)' + settings.cookieName + '\\s*\\=\\s*([^;]*).*$)|^.*$');
+        return document.cookie.replace(regex, '$1');
       },
       removeGate: function() {
         $('.agegate-wrapper').fadeOut(1000);
